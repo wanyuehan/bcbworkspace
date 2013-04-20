@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DE6B6C52-269C-401F-8798-E53EF4C29633}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="UML\理化考试设计.tgproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="lhexam\LHExam.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TYInput\TYInput.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TYSVR\TYSvr.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="WYHEXCEL\WYHEXCEL.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="理化考试设计">
+        <MSBuild Projects="UML\理化考试设计.tgproj"/>
+    </Target>
+    <Target Name="理化考试设计:Clean">
+        <MSBuild Projects="UML\理化考试设计.tgproj" Targets="Clean"/>
+    </Target>
+    <Target Name="理化考试设计:Make">
+        <MSBuild Projects="UML\理化考试设计.tgproj" Targets="Make"/>
+    </Target>
+    <Target Name="LHExam">
+        <MSBuild Projects="lhexam\LHExam.cbproj"/>
+    </Target>
+    <Target Name="LHExam:Clean">
+        <MSBuild Projects="lhexam\LHExam.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LHExam:Make">
+        <MSBuild Projects="lhexam\LHExam.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="TYInput">
+        <MSBuild Projects="TYInput\TYInput.cbproj"/>
+    </Target>
+    <Target Name="TYInput:Clean">
+        <MSBuild Projects="TYInput\TYInput.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TYInput:Make">
+        <MSBuild Projects="TYInput\TYInput.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="TYSvr">
+        <MSBuild Projects="TYSVR\TYSvr.cbproj"/>
+    </Target>
+    <Target Name="TYSvr:Clean">
+        <MSBuild Projects="TYSVR\TYSvr.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TYSvr:Make">
+        <MSBuild Projects="TYSVR\TYSvr.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="WYHEXCEL">
+        <MSBuild Projects="WYHEXCEL\WYHEXCEL.cbproj"/>
+    </Target>
+    <Target Name="WYHEXCEL:Clean">
+        <MSBuild Projects="WYHEXCEL\WYHEXCEL.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="WYHEXCEL:Make">
+        <MSBuild Projects="WYHEXCEL\WYHEXCEL.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="理化考试设计;LHExam;TYInput;TYSvr;WYHEXCEL"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="理化考试设计:Clean;LHExam:Clean;TYInput:Clean;TYSvr:Clean;WYHEXCEL:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="理化考试设计:Make;LHExam:Make;TYInput:Make;TYSvr:Make;WYHEXCEL:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
