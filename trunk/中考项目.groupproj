@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DE6B6C52-269C-401F-8798-E53EF4C29633}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="UML\理化考试设计.tgproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="理化考试设计">
+        <MSBuild Projects="UML\理化考试设计.tgproj"/>
+    </Target>
+    <Target Name="理化考试设计:Clean">
+        <MSBuild Projects="UML\理化考试设计.tgproj" Targets="Clean"/>
+    </Target>
+    <Target Name="理化考试设计:Make">
+        <MSBuild Projects="UML\理化考试设计.tgproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="理化考试设计"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="理化考试设计:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="理化考试设计:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
