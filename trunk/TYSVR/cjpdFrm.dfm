@@ -6,16 +6,16 @@ object pdFrm: TpdFrm
   ClientHeight = 320
   ClientWidth = 550
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = GB2312_CHARSET
   Font.Color = clWindowText
-  Font.Height = -10
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = #23435#20307
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 12
+  TextHeight = 13
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
@@ -31,8 +31,8 @@ object pdFrm: TpdFrm
     object Label1: TLabel
       Left = 12
       Top = 18
-      Width = 30
-      Height = 12
+      Width = 39
+      Height = 13
       Margins.Left = 2
       Margins.Top = 2
       Margins.Right = 2
@@ -42,8 +42,8 @@ object pdFrm: TpdFrm
     object Label2: TLabel
       Left = 143
       Top = 18
-      Width = 30
-      Height = 12
+      Width = 39
+      Height = 13
       Margins.Left = 2
       Margins.Top = 2
       Margins.Right = 2
@@ -80,7 +80,7 @@ object pdFrm: TpdFrm
       Left = 182
       Top = 16
       Width = 108
-      Height = 20
+      Height = 21
       Margins.Left = 2
       Margins.Top = 2
       Margins.Right = 2
@@ -123,10 +123,10 @@ object pdFrm: TpdFrm
     Align = alClient
     DataSource = DS
     TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Charset = GB2312_CHARSET
     TitleFont.Color = clWindowText
-    TitleFont.Height = -10
-    TitleFont.Name = 'Tahoma'
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
     TitleFont.Style = []
   end
   object DS: TDataSource

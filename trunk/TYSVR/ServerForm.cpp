@@ -12,8 +12,13 @@
 TWYHEXCEL* wyhexcel=NULL;
 TSvrForm *SvrForm;
 TpdFrm *pdFrm=NULL;
+float aNumber=0.00001;//单精度容差
 UnicodeString filepath="";
 long TOTAL=0,t0=0,t1=0,t2=0;
+
+bool FloatEqual(float _x,float _y){
+	return fabs(_x-_y)<aNumber;
+}
 
 AnsiString ParseNum(AnsiString num){
         AnsiString temp="";
@@ -29,7 +34,7 @@ AnsiString ParseNum(AnsiString num){
 __fastcall TSvrForm::TSvrForm(TComponent* Owner)
         : TForm(Owner)
 {
-	filepath=ExtractFilePath(Application->ExeName)+"\\成绩公示表2013.xlt";
+	filepath=ExtractFilePath(Application->ExeName)+"\\成绩公示表.xlt";
 }
 //---------------------------------------------------------------------------
 
@@ -62,7 +67,7 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
 	RS->Active=false;
 	RS->SQL->Text="select * from resault order by ftyjsh";
 	RS->Active=true;
-	RS->Filter="fbmddm="+Z.Trim();
+	RS->Filter="bmddm="+Z.Trim();
 	RS->Filtered=true;
 	RS->First();
 	while(!RS->Eof){
@@ -73,13 +78,13 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
 		xkid1=Choice[RS->FieldByName("kslb")->AsInteger-1]/10;
 		xkid2=Choice[RS->FieldByName("kslb")->AsInteger-1]%10;
 		bool x=true;
-		if(RS->FieldByName("XK_CJ1")->AsFloat!=RS->FieldByName("XK_CJ2")->AsFloat)
-        {
+		if(!FloatEqual(RS->FieldByName("XK_CJ1")->AsFloat,RS->FieldByName("XK_CJ2")->AsFloat))
+		{
 		 reinput1:
 			 Z="";
 			 while(Z=="")Z=InputBox("两次输入成绩不一致","请谨慎输入"+ RS->FieldByName("FZKH")->AsString +" " +  RS->FieldByName("FXM")->AsString +" " +  ParseNum(RS->FieldByName("FTYJSH")->AsString) +"长跑最终体育成绩","");
 
-			 if( Z!=RS->FieldByName("XK_CJ1")->AsString&&Z!=RS->FieldByName("XK_CJ2")->AsString)
+			 if(!FloatEqual(Z.ToDouble(),RS->FieldByName("XK_CJ1")->AsFloat)&&!FloatEqual(Z.ToDouble(),RS->FieldByName("XK_CJ2")->AsFloat))
 				if(Application->MessageBoxA(L"本次输入的成绩与其他两次均不一致，是否确认保存？",L"提示",MB_YESNO)==IDNO){x=false;goto reinput1;}
 
         }else
@@ -91,12 +96,12 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
         x=true;
 		Z="";
 
-		if(RS->FieldByName("CJ11")->AsFloat!=RS->FieldByName("CJ12")->AsFloat)
+		if(!FloatEqual(RS->FieldByName("CJ11")->AsFloat,RS->FieldByName("CJ12")->AsFloat))
         {
 			 reinput2:
 			 Z="";
 			 while(Z=="")Z=InputBox("两次输入成绩不一致","请谨慎输入"+ RS->FieldByName("FZKH")->AsString +" " +  RS->FieldByName("FXM")->AsString +" " + ParseNum(RS->FieldByName("FTYJSH")->AsString) + Subjects[xkid1-1] +"\n最终体育成绩","");
-			 if(Z!=RS->FieldByName("CJ11")->AsAnsiString&&Z!=RS->FieldByName("CJ12")->AsAnsiString)
+			 if(FloatEqual(Z.ToDouble(),RS->FieldByName("CJ11")->AsFloat)==false&&FloatEqual(Z.ToDouble(),RS->FieldByName("CJ12")->AsFloat)==false)
 				if(Application->MessageBoxA(L"本次输入的成绩与其他两次均不一致，是否确认保存？",L"提示",MB_YESNO)==IDNO){x=false;goto reinput2;};
         }else
              Z=FormatFloat(".00",RS->FieldByName("CJ12")->AsFloat);
@@ -107,12 +112,12 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
         x=true;
         Z="";
 
-		if(RS->FieldByName("CJ21")->AsFloat!=RS->FieldByName("CJ22")->AsFloat)
+		if(!FloatEqual(RS->FieldByName("CJ21")->AsFloat,RS->FieldByName("CJ22")->AsFloat))
         {
 			 reinput3:
 			 Z="";
 			 while(Z=="")Z=InputBox("两次输入成绩不一致","请谨慎输入"+ RS->FieldByName("FZKH")->AsString +" " +  RS->FieldByName("FXM")->AsString + " " +  ParseNum(RS->FieldByName("FTYJSH")->AsString)+ Subjects[xkid2-1] +"\n最终体育成绩","");
-			 if(Z!=RS->FieldByName("CJ21")->AsAnsiString&&Z!=RS->FieldByName("CJ22")->AsAnsiString)
+			 if(!FloatEqual(Z.ToDouble(),RS->FieldByName("CJ21")->AsFloat)&& !FloatEqual(Z.ToDouble(),RS->FieldByName("CJ22")->AsFloat))
 				if(Application->MessageBoxA(L"本次输入的成绩与其他两次均不一致，是否确认保存？",L"提示",MB_YESNO)==IDNO){x=false;goto reinput3;};
         }else
              Z=FormatFloat(".00",RS->FieldByName("CJ22")->AsFloat);
@@ -121,7 +126,8 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
 		RS->FieldByName("FS2")->AsFloat=ScoreParse(xkid2,RS->FieldByName("sex")->AsInteger,RS->FieldByName("CJ2")->AsFloat);
        }
         Z="";
-        RS->FieldByName("ZF")->AsFloat=RS->FieldByName("XKFS")->AsFloat+RS->FieldByName("FS1")->AsFloat+RS->FieldByName("FS2")->AsFloat;
+		RS->FieldByName("ZF")->AsFloat=RS->FieldByName("XKFS")->AsFloat+RS->FieldByName("FS1")->AsFloat+RS->FieldByName("FS2")->AsFloat;
+		RS->FieldByName("ZF2")->AsFloat=floor(RS->FieldByName("ZF")->AsFloat * 4/3+0.5);
         RS->FieldByName("flag")->AsInteger=3;
         RS->Post();
         RS->Next();
@@ -213,7 +219,7 @@ void __fastcall TSvrForm::btnParseScoreClick(TObject *Sender)
 	int xkid1=-1,xkid2=-1;
     while(!RS->Eof){
 	if(RS->FieldByName("FLAG")->AsInteger!=2) {RS->Next();continue;}
-        RS->Edit();
+		RS->Edit();
 	Application->ProcessMessages();
 
 		xkid1=Choice[RS->FieldByName("kslb")->AsInteger-1]/10;
@@ -221,7 +227,8 @@ void __fastcall TSvrForm::btnParseScoreClick(TObject *Sender)
 		RS->FieldByName("FS1")->AsFloat=ScoreParse(xkid1,RS->FieldByName("sex")->AsInteger,RS->FieldByName("CJ1")->AsFloat);
         RS->FieldByName("FS2")->AsFloat=ScoreParse(xkid2,RS->FieldByName("sex")->AsInteger,RS->FieldByName("CJ2")->AsFloat);
 		RS->FieldByName("XKFS")->AsFloat=ScoreParse(5,RS->FieldByName("sex")->AsInteger,RS->FieldByName("XK_CJ")->AsFloat);
-        RS->FieldByName("ZF")->AsFloat=RS->FieldByName("XKFS")->AsFloat+RS->FieldByName("FS1")->AsFloat+RS->FieldByName("FS2")->AsFloat;
+		RS->FieldByName("ZF")->AsFloat=RS->FieldByName("XKFS")->AsFloat+RS->FieldByName("FS1")->AsFloat+RS->FieldByName("FS2")->AsFloat;
+        RS->FieldByName("ZF2")->AsFloat=floor(RS->FieldByName("ZF")->AsFloat * 4/3+0.5);
         RS->FieldByName("flag")->AsInteger=3;
 		RS->Post();
         RS->Next();
@@ -234,7 +241,7 @@ void __fastcall TSvrForm::btnPrintClick(TObject *Sender)
     AnsiString Z=InputBox("打印某报名点成绩","请谨慎输入四位报名点号码如：0001","0000");
 	if(Z.Trim().Length()<4)Abort();
 	RS->Active=false;
-	RS->SQL->Text="select * from resault where flag<>3 AND fbmddm='"+Z+"'";
+	RS->SQL->Text="select * from resault where flag<>3 AND bmddm='"+Z+"'";
 	RS->Active=true;
 	if(RS->RecordCount>0){
 	   Application->MessageBoxA(L"该报名点有还没有录入完成或者没有校验的学生！",L"提示",MB_OK|MB_ICONWARNING);
@@ -244,7 +251,7 @@ void __fastcall TSvrForm::btnPrintClick(TObject *Sender)
 	RS->Active=false;
 	RS->SQL->Text="select * from resault order by fzkh";
 	RS->Active=true;
-	RS->Filter="fbmddm="+Z.Trim();
+	RS->Filter="bmddm="+Z.Trim();
 	RS->Filtered=true;
 	RS->First();
 	wyhexcel=new TWYHEXCEL(true,NULL,this);
@@ -256,13 +263,15 @@ void __fastcall TSvrForm::btnPrintClick(TObject *Sender)
 		 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,2,RS->FieldByName("FXM")->AsAnsiString.c_str());
 		 temp=(RS->FieldByName("SEX")->AsInteger==1)?"男":"女";
 		 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,3,temp);
-		 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,4,(RS->FieldByName("CJ1")->AsAnsiString+" / "+RS->FieldByName("FS1")->AsAnsiString).c_str());
+		 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,4,AnsiString(FormatFloat("0.00",RS->FieldByName("CJ1")->AsFloat)+" / "+RS->FieldByName("FS1")->AsWideString).c_str());
 		 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,5,AnsiString(FormatFloat("0.00",RS->FieldByName("CJ2")->AsFloat)+" / "+RS->FieldByName("FS2")->AsWideString).c_str());
 		 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,6,AnsiString(FormatFloat("0.00",RS->FieldByName("XK_CJ")->AsFloat)+" / "+RS->FieldByName("XKFS")->AsWideString).c_str());
 		 if(RS->FieldByName("ZF")->AsInteger==0){
-			 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,7,"缺考/缓考/免考");
+			 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,7,"------");
+			 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,8,"缺考/缓考/免考");
 		 }else{
 			 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,7,RS->FieldByName("ZF")->AsAnsiString.c_str());
+			 wyhexcel->WorkBook->ActiveSheet->SetCellsValue(i,8,RS->FieldByName("ZF2")->AsAnsiString.c_str());
 		 }
 		 RS->Next();
 	}

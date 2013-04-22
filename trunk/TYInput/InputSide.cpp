@@ -52,7 +52,7 @@ void __fastcall TForm1::FILTERClick(TObject *Sender)
 			  ShowMessage("必填项没有填写完整");
 			  Abort();
         }
-        AnsiString FilterString="fbmddm="+BMDLIST->Text.SubString(0,4);
+        AnsiString FilterString="bmddm="+BMDLIST->Text.SubString(0,4);
         FilterString+=" and kslb="+IntToStr(XKLB->ItemIndex+1);
         FilterString+=" and sex="+IntToStr(SEXCB->ItemIndex+1);
         FilterString+=" and groupid="+GROUPID->Text;
