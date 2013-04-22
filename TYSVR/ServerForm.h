@@ -61,6 +61,7 @@ __published:	// IDE-managed Components
 	void __fastcall btnPrintClick(TObject *Sender);
 	void __fastcall bt_PDSetClick(TObject *Sender);
 private:	// User declarations
+
 public:		// User declarations
         __fastcall TSvrForm(TComponent* Owner);
         float __fastcall ScoreParse(int kslb,int sex,float cj);

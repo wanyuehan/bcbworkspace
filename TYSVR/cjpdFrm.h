@@ -9,7 +9,7 @@
 #include <Vcl.Forms.hpp>
 #include <ADODB.hpp>
 #include <DB.hpp>
-#include "../common.h"
+#include "../TYinput/common.h"
 #include <Vcl.DBCtrls.hpp>
 #include <Vcl.DBGrids.hpp>
 #include <Vcl.ExtCtrls.hpp>
