@@ -102,7 +102,7 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
 			 reinput2:
 			 Z="";
 			 while(Z=="")Z=InputBox("两次输入成绩不一致","请谨慎输入"+ RS->FieldByName("FZKH")->AsString +" " +  RS->FieldByName("FXM")->AsString +" " + ParseNum(RS->FieldByName("FTYJSH")->AsString) + Subjects[xkid1-1] +"\n最终体育成绩","");
-			 if(FloatEqual(Z.ToDouble(),RS->FieldByName("CJ11")->AsFloat)==false&&FloatEqual(Z.ToDouble(),RS->FieldByName("CJ12")->AsFloat)==false)
+			 if(!FloatEqual(Z.ToDouble(),RS->FieldByName("CJ11")->AsFloat)&&!FloatEqual(Z.ToDouble(),RS->FieldByName("CJ12")->AsFloat))
 				if(Application->MessageBoxA(L"本次输入的成绩与其他两次均不一致，是否确认保存？",L"提示",MB_YESNO)==IDNO){x=false;goto reinput2;};
         }else
              Z=FormatFloat(".00",RS->FieldByName("CJ12")->AsFloat);
