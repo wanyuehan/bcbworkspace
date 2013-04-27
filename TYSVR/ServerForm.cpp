@@ -75,8 +75,9 @@ void __fastcall TSvrForm::btnChkInputClick(TObject *Sender)
 		RS->Edit();
 	Application->ProcessMessages();
 		AnsiString Z="";
-		xkid1=Choice[RS->FieldByName("kslb")->AsInteger-1]/10;
-		xkid2=Choice[RS->FieldByName("kslb")->AsInteger-1]%10;
+		int kslb=StrToInt(RS->FieldByName("kslb")->AsAnsiString)-1;
+		xkid1=Choice[kslb]/10;
+		xkid2=Choice[kslb]%10;
 		bool x=true;
 		if(!FloatEqual(RS->FieldByName("XK_CJ1")->AsFloat,RS->FieldByName("XK_CJ2")->AsFloat))
 		{
@@ -221,9 +222,9 @@ void __fastcall TSvrForm::btnParseScoreClick(TObject *Sender)
 	if(RS->FieldByName("FLAG")->AsInteger!=2) {RS->Next();continue;}
 		RS->Edit();
 	Application->ProcessMessages();
-
-		xkid1=Choice[RS->FieldByName("kslb")->AsInteger-1]/10;
-		xkid2=Choice[RS->FieldByName("kslb")->AsInteger-1]%10;
+		int kslb=StrToInt(RS->FieldByName("kslb")->AsAnsiString)-1;
+		xkid1=Choice[kslb]/10;
+		xkid2=Choice[kslb]%10;
 		RS->FieldByName("FS1")->AsFloat=ScoreParse(xkid1,RS->FieldByName("sex")->AsInteger,RS->FieldByName("CJ1")->AsFloat);
         RS->FieldByName("FS2")->AsFloat=ScoreParse(xkid2,RS->FieldByName("sex")->AsInteger,RS->FieldByName("CJ2")->AsFloat);
 		RS->FieldByName("XKFS")->AsFloat=ScoreParse(5,RS->FieldByName("sex")->AsInteger,RS->FieldByName("XK_CJ")->AsFloat);
