@@ -14,6 +14,7 @@ object MainFrm: TMainFrm
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 16
   object Panel1: TPanel
@@ -31,13 +32,6 @@ object MainFrm: TMainFrm
       Height = 16
       Caption = #32771#28857#21517#31216':'
     end
-    object Label2: TLabel
-      Left = 272
-      Top = 12
-      Width = 65
-      Height = 16
-      Caption = #32771#35797#26102#38388':'
-    end
     object Label3: TLabel
       Left = 533
       Top = 12
@@ -48,7 +42,7 @@ object MainFrm: TMainFrm
     object cbKD: TComboBox
       Left = 95
       Top = 9
-      Width = 162
+      Width = 418
       Height = 24
       Style = csDropDownList
       Ctl3D = True
@@ -66,10 +60,10 @@ object MainFrm: TMainFrm
     object meKC: TMaskEdit
       Left = 614
       Top = 9
-      Width = 43
+      Width = 35
       Height = 24
       Alignment = taCenter
-      EditMask = '00;1;0'
+      EditMask = '!99;1;_'
       MaxLength = 2
       TabOrder = 1
       Text = '  '
@@ -90,24 +84,7 @@ object MainFrm: TMainFrm
       Height = 25
       Caption = #37325' '#36755
       TabOrder = 3
-    end
-    object cbKSDATE: TComboBox
-      Left = 343
-      Top = 9
-      Width = 170
-      Height = 24
-      Style = csDropDownList
-      ItemIndex = 0
-      TabOrder = 4
-      Text = #35831#36873#25321#32771#35797#26102#38388
-      Items.Strings = (
-        #35831#36873#25321#32771#35797#26102#38388
-        #20116#26376#19971#26085#19978#21320
-        #20116#26376#19971#26085#19979#21320
-        #20116#26376#20843#26085#19978#21320
-        #20116#26376#20843#26085#19979#21320
-        #20116#26376#20061#26085#19978#21320
-        #20116#26376#20061#26085#19979#21320)
+      OnClick = btResetClick
     end
   end
   object Panel2: TPanel
@@ -119,11 +96,13 @@ object MainFrm: TMainFrm
     BevelOuter = bvLowered
     TabOrder = 1
     object lbSubject: TLabel
+      AlignWithMargins = True
       Left = 0
       Top = 16
-      Width = 228
+      Width = 230
       Height = 16
       Alignment = taCenter
+      AutoSize = False
       Caption = #24403#21069#36755#20837#31185#30446':'#12298'%s'#12299#31532' %d '#36718
       Font.Charset = GB2312_CHARSET
       Font.Color = clRed
@@ -131,6 +110,7 @@ object MainFrm: TMainFrm
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      Transparent = True
     end
     object Label5: TLabel
       Left = 80
@@ -280,9 +260,6 @@ object MainFrm: TMainFrm
       BevelOuter = bvLowered
       Caption = '%s '#22312#32771#28857' %s '#21442#21152' '#31532' %d '#27425#32771#35797#30340#23398#29983#20849#26377' %d '#20154
       TabOrder = 1
-      ExplicitLeft = 328
-      ExplicitTop = 336
-      ExplicitWidth = 185
     end
   end
 end

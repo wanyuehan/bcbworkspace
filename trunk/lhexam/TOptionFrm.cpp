@@ -45,9 +45,10 @@ void __fastcall TOptionFrm::OKBtnClick(TObject *Sender)
 	 }else
 	 {
 		this->Hide();
-		if(mainfrm==NULL){
-			mainfrm=new TMainFrm(this, rgKM->ItemIndex, rgTurns->ItemIndex,false);
+		if(mainfrm!=NULL){
+           mainfrm->Close();
 		}
+		mainfrm=new TMainFrm(this, rgKM->ItemIndex, rgTurns->ItemIndex,false);
 		mainfrm->Show();
 	 }
   }else//ÊäÈëÎÞÐ§
