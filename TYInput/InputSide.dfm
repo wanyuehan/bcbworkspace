@@ -1,6 +1,7 @@
 object Form1: TForm1
   Left = 205
   Top = 120
+  Caption = '2013'#24180#21021#20013#21319#23398#20307#32946#32771#35797#25104#32489#32479#35745#31995#32479#24405#20837#31471
   ClientHeight = 504
   ClientWidth = 731
   Color = clBtnFace

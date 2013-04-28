@@ -8,71 +8,6 @@ object dm: Tdm
     Left = 32
     Top = 16
   end
-  object RS: TADOTable
-    Connection = conn
-    CursorType = ctStatic
-    TableName = 'lhscore'
-    Left = 112
-    Top = 16
-    object RSFXM: TWideStringField
-      FieldName = 'FXM'
-      Size = 8
-    end
-    object RSFBMDDM: TWideStringField
-      FieldName = 'FBMDDM'
-      Size = 4
-    end
-    object RSFBZ: TWideStringField
-      FieldName = 'FBZ'
-      Size = 254
-    end
-    object RSFLHJSH: TWideStringField
-      FieldName = 'FLHJSH'
-      Size = 14
-    end
-    object RSFWL1: TFloatField
-      FieldName = 'FWL1'
-    end
-    object RSFWL2: TFloatField
-      FieldName = 'FWL2'
-    end
-    object RSFWL: TFloatField
-      FieldName = 'FWL'
-    end
-    object RSFHX1: TFloatField
-      FieldName = 'FHX1'
-    end
-    object RSFHX2: TFloatField
-      FieldName = 'FHX2'
-    end
-    object RSFHX: TFloatField
-      FieldName = 'FHX'
-    end
-    object RSFBMDMC: TWideStringField
-      FieldName = 'FBMDMC'
-      Size = 40
-    end
-    object RSFZKH: TWideStringField
-      FieldName = 'FZKH'
-      Size = 12
-    end
-    object RSfkddm: TWideStringField
-      FieldName = 'fkddm'
-      Size = 2
-    end
-    object RSfsjdm: TWideStringField
-      FieldName = 'fsjdm'
-      Size = 2
-    end
-    object RSfccdm: TWideStringField
-      FieldName = 'fccdm'
-      Size = 2
-    end
-    object RSfzwdm: TWideStringField
-      FieldName = 'fzwdm'
-      Size = 2
-    end
-  end
   object QRY: TADOQuery
     Connection = conn
     Parameters = <>
@@ -80,11 +15,95 @@ object dm: Tdm
     Top = 16
   end
   object conn: TADOConnection
-    Connected = True
-    ConnectionString = 'file name=connection.udl'
+    ConnectionString = 'FILE NAME=.\connection.udl'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 72
-    Top = 24
+    Top = 16
+  end
+  object RS: TADOTable
+    Connection = conn
+    CursorType = ctStatic
+    TableName = 'lhresault'
+    Left = 112
+    Top = 16
+    object RSFZKH: TWideStringField
+      FieldName = 'FZKH'
+      Size = 12
+    end
+    object RSFXM: TWideStringField
+      FieldName = 'FXM'
+      Size = 8
+    end
+    object RSFLHJSH: TWideStringField
+      FieldName = 'FLHJSH'
+      Size = 14
+    end
+    object RSFWL1: TBCDField
+      FieldName = 'FWL1'
+      DisplayFormat = '00.00'
+      EditFormat = '00.00'
+      MaxValue = 10.000000000000000000
+      Precision = 18
+      Size = 2
+    end
+    object RSFWL2: TBCDField
+      FieldName = 'FWL2'
+      DisplayFormat = '00.00'
+      EditFormat = '00.00'
+      MaxValue = 10.000000000000000000
+      Precision = 18
+      Size = 2
+    end
+    object RSFWL: TBCDField
+      FieldName = 'FWL'
+      DisplayFormat = '00.00'
+      EditFormat = '00.00'
+      MaxValue = 10.000000000000000000
+      Precision = 18
+      Size = 2
+    end
+    object RSFHX1: TBCDField
+      FieldName = 'FHX1'
+      DisplayFormat = '00.00'
+      EditFormat = '00.00'
+      MaxValue = 10.000000000000000000
+      Precision = 18
+      Size = 2
+    end
+    object RSFHX2: TBCDField
+      FieldName = 'FHX2'
+      DisplayFormat = '00.00'
+      EditFormat = '00.00'
+      MaxValue = 10.000000000000000000
+      Precision = 18
+      Size = 2
+    end
+    object RSFHX: TBCDField
+      FieldName = 'FHX'
+      DisplayFormat = '00.00'
+      EditFormat = '00.00'
+      MaxValue = 10.000000000000000000
+      Precision = 18
+      Size = 2
+    end
+    object RSflag: TSmallintField
+      FieldName = 'flag'
+    end
+    object RSkddm: TStringField
+      FieldName = 'kddm'
+      FixedChar = True
+      Size = 4
+    end
+    object RSkcdm: TStringField
+      FieldName = 'kcdm'
+      FixedChar = True
+      Size = 2
+    end
+    object RSzwh: TStringField
+      FieldName = 'zwh'
+      FixedChar = True
+      Size = 2
+    end
   end
 end

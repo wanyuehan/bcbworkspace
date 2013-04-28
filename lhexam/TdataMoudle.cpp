@@ -17,7 +17,7 @@ __fastcall Tdm::Tdm(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall Tdm::DataModuleCreate(TObject *Sender)
 {
-	conn->ConnectionString="file name=connection.udl";
+	conn->ConnectionString="file name=./connection.udl";
 	conn->Connected;
 }
 //---------------------------------------------------------------------------
