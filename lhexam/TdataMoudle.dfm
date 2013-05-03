@@ -4,6 +4,7 @@ object dm: Tdm
   Height = 150
   Width = 215
   object GRIDDS: TDataSource
+    AutoEdit = False
     DataSet = RS
     Left = 32
     Top = 16
@@ -24,6 +25,9 @@ object dm: Tdm
   object RS: TADOTable
     Connection = conn
     CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    EnableBCD = False
+    IndexFieldNames = 'flhjsh'
     TableName = 'lhresault'
     Left = 112
     Top = 16

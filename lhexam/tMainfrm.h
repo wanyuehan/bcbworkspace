@@ -37,14 +37,22 @@ __published:	// IDE-managed Components
 	TPanel *pmsg;
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall btEnterClick(TObject *Sender);
-	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall btResetClick(TObject *Sender);
+	void __fastcall btNextClick(TObject *Sender);
+	void __fastcall meScoreKeyPress(TObject *Sender, System::WideChar &Key);
+	void __fastcall meKCKeyPress(TObject *Sender, System::WideChar &Key);
+	void __fastcall btSaveClick(TObject *Sender);
+	void __fastcall btCancelClick(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 	TForm *pFrm;
 	void __fastcall LoadKD();  //
 	void __fastcall LoadCol();
 	void __fastcall RestCol();
-public:		// User declarations
+	void __fastcall SetEnable(bool isEnabled);
+	public:		// User declarations
+	void __fastcall InitData(int subject,int turns,bool isAdmin);
+	void __fastcall InitControl();
 	__fastcall TMainFrm(TComponent* Owner,int subject,int turns,bool isAdmin);
 };
 //---------------------------------------------------------------------------
