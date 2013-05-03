@@ -60,13 +60,14 @@ object MainFrm: TMainFrm
     object meKC: TMaskEdit
       Left = 614
       Top = 9
-      Width = 35
+      Width = 65
       Height = 24
       Alignment = taCenter
       EditMask = '!99;1;_'
       MaxLength = 2
       TabOrder = 1
       Text = '  '
+      OnKeyPress = meKCKeyPress
     end
     object btEnter: TButton
       Left = 696
@@ -120,21 +121,24 @@ object MainFrm: TMainFrm
       Caption = #25104#32489#24405#20837
     end
     object meScore: TMaskEdit
-      Left = 32
+      Left = 33
       Top = 88
-      Width = 144
+      Width = 142
       Height = 48
       Alignment = taCenter
-      EditMask = '00.00;1;0'
+      DoubleBuffered = False
+      EditMask = '!99.99;1;_'
       Font.Charset = GB2312_CHARSET
       Font.Color = clHotLight
       Font.Height = -33
       Font.Name = 'Tahoma'
       Font.Style = []
       MaxLength = 5
+      ParentDoubleBuffered = False
       ParentFont = False
       TabOrder = 0
       Text = '  .  '
+      OnKeyPress = meScoreKeyPress
     end
     object btNext: TButton
       Left = 33
@@ -143,6 +147,7 @@ object MainFrm: TMainFrm
       Height = 41
       Caption = #36755#20837#19979#19968#20010
       TabOrder = 1
+      OnClick = btNextClick
     end
     object btPrev: TButton
       Left = 33
@@ -159,6 +164,7 @@ object MainFrm: TMainFrm
       Height = 42
       Caption = #20445#23384#26412#32452#25968#25454
       TabOrder = 3
+      OnClick = btSaveClick
     end
     object btCancel: TButton
       Left = 33
@@ -167,6 +173,7 @@ object MainFrm: TMainFrm
       Height = 42
       Caption = #21462#28040#26412#32452#25968#25454
       TabOrder = 4
+      OnClick = btCancelClick
     end
   end
   object Panel3: TPanel
