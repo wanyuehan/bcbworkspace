@@ -17,9 +17,6 @@ __published:	// IDE-managed Components
 	TWideStringField *RSFZKH;
 	TWideStringField *RSFXM;
 	TWideStringField *RSFLHJSH;
-	TBCDField *RSFWL1;
-	TBCDField *RSFWL2;
-	TBCDField *RSFWL;
 	TBCDField *RSFHX1;
 	TBCDField *RSFHX2;
 	TBCDField *RSFHX;
@@ -27,6 +24,7 @@ __published:	// IDE-managed Components
 	TStringField *RSkddm;
 	TStringField *RSkcdm;
 	TStringField *RSzwh;
+	TSmallintField *RSFLHFLAG;
 	void __fastcall DataModuleCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations

@@ -44,16 +44,18 @@ __published:	// IDE-managed Components
 	void __fastcall btSaveClick(TObject *Sender);
 	void __fastcall btCancelClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall meScoreChange(TObject *Sender);
 private:	// User declarations
 	TForm *pFrm;
 	void __fastcall LoadKD();  //
 	void __fastcall LoadCol();
 	void __fastcall RestCol();
 	void __fastcall SetEnable(bool isEnabled);
+	void __fastcall SeekRow();
 	public:		// User declarations
 	void __fastcall InitData(int subject,int turns,bool isAdmin);
 	void __fastcall InitControl();
-	__fastcall TMainFrm(TComponent* Owner,int subject,int turns,bool isAdmin);
+	__fastcall TMainFrm(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMainFrm *MainFrm;

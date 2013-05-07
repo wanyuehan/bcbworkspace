@@ -138,6 +138,7 @@ object MainFrm: TMainFrm
       ParentFont = False
       TabOrder = 0
       Text = '  .  '
+      OnChange = meScoreChange
       OnKeyPress = meScoreKeyPress
     end
     object btNext: TButton
@@ -231,7 +232,7 @@ object MainFrm: TMainFrm
           Visible = True
         end
         item
-          Color = clGradientActiveCaption
+          Color = clSkyBlue
           Expanded = False
           Font.Charset = GB2312_CHARSET
           Font.Color = clNavy
@@ -246,14 +247,14 @@ object MainFrm: TMainFrm
           Alignment = taCenter
           Color = clCream
           Expanded = False
-          FieldName = 'FBMDMC'
+          FieldName = 'FLHFLAG'
           Font.Charset = GB2312_CHARSET
           Font.Color = clHighlight
           Font.Height = -13
           Font.Name = 'Tahoma'
           Font.Style = []
           Title.Alignment = taCenter
-          Title.Caption = #25253#21517#28857#21517#31216
+          Title.Caption = #36873#32771#31867#22411
           Width = 222
           Visible = True
         end>

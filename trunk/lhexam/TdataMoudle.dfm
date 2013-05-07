@@ -1,26 +1,26 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 150
-  Width = 215
+  Height = 85
+  Width = 174
   object GRIDDS: TDataSource
-    AutoEdit = False
     DataSet = RS
-    Left = 32
-    Top = 16
+    Left = 8
+    Top = 8
   end
   object QRY: TADOQuery
     Connection = conn
     Parameters = <>
-    Left = 160
-    Top = 16
+    Left = 128
+    Top = 8
   end
   object conn: TADOConnection
     ConnectionString = 'FILE NAME=.\connection.udl'
     LoginPrompt = False
-    Provider = 'SQLOLEDB.1'
-    Left = 72
-    Top = 16
+    Mode = cmShareDenyNone
+    Provider = '.\connection.udl'
+    Left = 48
+    Top = 8
   end
   object RS: TADOTable
     Connection = conn
@@ -29,8 +29,8 @@ object dm: Tdm
     EnableBCD = False
     IndexFieldNames = 'flhjsh'
     TableName = 'lhresault'
-    Left = 112
-    Top = 16
+    Left = 88
+    Top = 8
     object RSFZKH: TWideStringField
       FieldName = 'FZKH'
       Size = 12
@@ -43,32 +43,8 @@ object dm: Tdm
       FieldName = 'FLHJSH'
       Size = 14
     end
-    object RSFWL1: TBCDField
-      FieldName = 'FWL1'
-      DisplayFormat = '00.00'
-      EditFormat = '00.00'
-      MaxValue = 10.000000000000000000
-      Precision = 18
-      Size = 2
-    end
-    object RSFWL2: TBCDField
-      FieldName = 'FWL2'
-      DisplayFormat = '00.00'
-      EditFormat = '00.00'
-      MaxValue = 10.000000000000000000
-      Precision = 18
-      Size = 2
-    end
-    object RSFWL: TBCDField
-      FieldName = 'FWL'
-      DisplayFormat = '00.00'
-      EditFormat = '00.00'
-      MaxValue = 10.000000000000000000
-      Precision = 18
-      Size = 2
-    end
     object RSFHX1: TBCDField
-      FieldName = 'FHX1'
+      FieldName = 'Flh1'
       DisplayFormat = '00.00'
       EditFormat = '00.00'
       MaxValue = 10.000000000000000000
@@ -76,7 +52,7 @@ object dm: Tdm
       Size = 2
     end
     object RSFHX2: TBCDField
-      FieldName = 'FHX2'
+      FieldName = 'Flh2'
       DisplayFormat = '00.00'
       EditFormat = '00.00'
       MaxValue = 10.000000000000000000
@@ -84,7 +60,7 @@ object dm: Tdm
       Size = 2
     end
     object RSFHX: TBCDField
-      FieldName = 'FHX'
+      FieldName = 'Flh'
       DisplayFormat = '00.00'
       EditFormat = '00.00'
       MaxValue = 10.000000000000000000
@@ -108,6 +84,9 @@ object dm: Tdm
       FieldName = 'zwh'
       FixedChar = True
       Size = 2
+    end
+    object RSFLHFLAG: TSmallintField
+      FieldName = 'FLHFLAG'
     end
   end
 end
