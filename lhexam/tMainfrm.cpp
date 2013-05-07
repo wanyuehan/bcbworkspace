@@ -10,11 +10,11 @@
 TMainFrm *MainFrm;
 UnicodeString subjects[2] = {"物理", "化学"};
 UnicodeString csubject = "";
-int turnflag = 0;
+bool isDirty = false;
+int turnflag = 0, lhflag = 3;
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainFrm::LoadKD() {
-
 	dm->QRY->SQL->Text = "select * from rqkdb order by FRQKD";
 	dm->QRY->Active = true;
 	cbKD->Items->Clear();
@@ -30,31 +30,32 @@ void __fastcall TMainFrm::LoadKD() {
 // ---------------------------------------------------------------------------
 void __fastcall TMainFrm::LoadCol() {
 
-	UnicodeString tempsubject = "";
-	if (csubject == "物理") {
-		tempsubject = "FWL";
-	}
-	else if (csubject == "化学") {
-		tempsubject = "FHX";
-	}
+	UnicodeString tempsubject = "FLH";
 	tempsubject += IntToStr(turnflag + 1);
 	dbGrid->Columns->Items[2]->FieldName = tempsubject;
 	dbGrid->Columns->Items[2]->Title->Caption = csubject;
 }
 
 // ---------------------------------------------------------------------------
+void __fastcall  TMainFrm::SeekRow() {
+	while(dm->RS->Eof==false&&dm->RS->Bof==false){
+		if(dm->RS->FieldByName("FLHFLAG")->AsInteger==lhflag){
+			break;
+		}
+		dm->RS->Next();
+	}
+}
 
+// ---------------------------------------------------------------------------
 void __fastcall TMainFrm::RestCol() {
 	dbGrid->Columns->Items[2]->FieldName = "";
 	dbGrid->Columns->Items[2]->Title->Caption = "";
 }
 
 // ---------------------------------------------------------------------------
-__fastcall TMainFrm::TMainFrm(TComponent* Owner, int subject, int turns,
-	bool isAdmin) : TForm(Owner) {
+__fastcall TMainFrm::TMainFrm(TComponent* Owner) : TForm(Owner) {
 	pFrm = (TForm*)Owner;
-	csubject = subjects[subject];
-	turnflag = turns;
+
 }
 
 // ---------------------------------------------------------------------------
@@ -66,6 +67,7 @@ void __fastcall TMainFrm::FormClose(TObject *Sender, TCloseAction &Action) {
 void __fastcall TMainFrm::InitData(int subject, int turns, bool isAdmin) {
 	csubject = subjects[subject];
 	turnflag = turns;
+	lhflag = subject;
 }
 
 // ---------------------------------------------------------------------------
@@ -81,9 +83,9 @@ void __fastcall TMainFrm::btEnterClick(TObject *Sender) {
 	}
 	dm->QRY->Active = false;
 	dm->QRY->SQL->Text =
-		Format("select * from lhresault where flag>%d and kddm='%s' and kcdm=%s"
-		, ARRAYOFCONST((turnflag,
-		cbKD->Items->Strings[cbKD->ItemIndex].SubString(2, 3), meKC->Text)));
+		Format("select * from lhresault where flag>%d and kddm='%s' and kcdm='%s' and flhflag=%d",
+		ARRAYOFCONST((turnflag, cbKD->Items->Strings[cbKD->ItemIndex].SubString
+		(2, 3), meKC->Text, lhflag)));
 	dm->QRY->Active = true;
 	if (dm->QRY->RecordCount > 0) {
 		ShowMessage("您不是本轮的输入人员！");
@@ -93,7 +95,7 @@ void __fastcall TMainFrm::btEnterClick(TObject *Sender) {
 	}
 	dm->QRY->Active = false;
 	dm->RS->Active = true;
-	dm->RS->Filter = Format("kddm='%s' and kcdm=%s",
+	dm->RS->Filter = Format("kddm='%s' and kcdm='%s'",
 		ARRAYOFCONST((cbKD->Items->Strings[cbKD->ItemIndex].SubString(2, 3),
 		meKC->Text)));
 	dm->RS->Filtered = true;
@@ -107,6 +109,7 @@ void __fastcall TMainFrm::btEnterClick(TObject *Sender) {
 	meScore->SetFocus();
 	btEnter->Enabled = false;
 	btReset->Enabled = true;
+    SeekRow();
 }
 // ---------------------------------------------------------------------------
 
@@ -137,10 +140,12 @@ void __fastcall TMainFrm::meScoreKeyPress(TObject *Sender,
 
 {
 	if ((int)Key == 13) {
+
 		dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =
 			StrToFloat(meScore->Text);
 		dm->RS->FieldByName("flag")->AsInteger = turnflag + 1;
-		btNext->Click();
+		dm->RS->FieldByName("FLHFLAG")->AsInteger = lhflag;
+        SeekRow();
 	}
 }
 // ---------------------------------------------------------------------------
@@ -165,14 +170,19 @@ void __fastcall TMainFrm::btCancelClick(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainFrm::FormCreate(TObject *Sender) {
-   InitControl();
+	InitControl();
 }
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainFrm::InitControl() {
-      if (dm == NULL)
+	if (dm == NULL)
 		dm = new Tdm(this);
 	LoadKD();
 	lbSubject->Caption = Format("当前输入科目:《%s》第 %d 轮",
 		ARRAYOFCONST((csubject, turnflag + 1)));
 }
+
+void __fastcall TMainFrm::meScoreChange(TObject *Sender) {
+	isDirty = true;
+}
+// ---------------------------------------------------------------------------
