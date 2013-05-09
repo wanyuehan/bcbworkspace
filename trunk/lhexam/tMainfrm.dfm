@@ -14,7 +14,6 @@ object MainFrm: TMainFrm
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   OnClose = FormClose
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 16
   object Panel1: TPanel
@@ -71,7 +70,7 @@ object MainFrm: TMainFrm
     end
     object btEnter: TButton
       Left = 696
-      Top = 9
+      Top = 10
       Width = 75
       Height = 25
       Caption = #30830' '#23450
@@ -142,8 +141,8 @@ object MainFrm: TMainFrm
       OnKeyPress = meScoreKeyPress
     end
     object btNext: TButton
-      Left = 33
-      Top = 150
+      Left = 34
+      Top = 238
       Width = 143
       Height = 41
       Caption = #36755#20837#19979#19968#20010
@@ -151,16 +150,16 @@ object MainFrm: TMainFrm
       OnClick = btNextClick
     end
     object btPrev: TButton
-      Left = 33
-      Top = 197
+      Left = 34
+      Top = 285
       Width = 142
       Height = 44
       Caption = #20462#25913#19978#19968#20010
       TabOrder = 2
     end
     object btSave: TButton
-      Left = 33
-      Top = 279
+      Left = 34
+      Top = 335
       Width = 142
       Height = 42
       Caption = #20445#23384#26412#32452#25968#25454
@@ -169,12 +168,21 @@ object MainFrm: TMainFrm
     end
     object btCancel: TButton
       Left = 33
-      Top = 327
+      Top = 383
       Width = 142
       Height = 42
       Caption = #21462#28040#26412#32452#25968#25454
       TabOrder = 4
       OnClick = btCancelClick
+    end
+    object btAnotherSubject: TButton
+      Left = 34
+      Top = 142
+      Width = 141
+      Height = 67
+      Caption = #21478#22806#19968#38376#35838#31243
+      TabOrder = 5
+      OnClick = btAnotherSubjectClick
     end
   end
   object Panel3: TPanel
@@ -198,6 +206,7 @@ object MainFrm: TMainFrm
       TitleFont.Height = -13
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnCellClick = dbGridCellClick
       Columns = <
         item
           Alignment = taCenter

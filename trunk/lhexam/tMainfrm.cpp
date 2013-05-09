@@ -9,9 +9,8 @@
 #pragma resource "*.dfm"
 TMainFrm *MainFrm;
 UnicodeString subjects[2] = {"物理", "化学"};
-UnicodeString csubject = "";
 bool isDirty = false;
-int turnflag = 0, lhflag = 3;
+int turnflag = 0, lhflag = 3,another=-1;
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainFrm::LoadKD() {
@@ -33,17 +32,21 @@ void __fastcall TMainFrm::LoadCol() {
 	UnicodeString tempsubject = "FLH";
 	tempsubject += IntToStr(turnflag + 1);
 	dbGrid->Columns->Items[2]->FieldName = tempsubject;
-	dbGrid->Columns->Items[2]->Title->Caption = csubject;
+	dbGrid->Columns->Items[2]->Title->Caption = subjects[lhflag];
 }
 
 // ---------------------------------------------------------------------------
 void __fastcall  TMainFrm::SeekRow() {
-	while(dm->RS->Eof==false&&dm->RS->Bof==false){
+	while(dm->RS->Eof==false){
 		if(dm->RS->FieldByName("FLHFLAG")->AsInteger==lhflag){
 			break;
 		}
 		dm->RS->Next();
 	}
+	dm->RS->Edit();
+	meScore->Text=FormatFloat("00.00",
+	dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat);
+	dbGrid->SelectedIndex=dm->RS->RecNo-1;
 }
 
 // ---------------------------------------------------------------------------
@@ -65,9 +68,11 @@ void __fastcall TMainFrm::FormClose(TObject *Sender, TCloseAction &Action) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainFrm::InitData(int subject, int turns, bool isAdmin) {
-	csubject = subjects[subject];
 	turnflag = turns;
 	lhflag = subject;
+	if(subject==0)another=1;
+	else another=0;
+	InitControl();
 }
 
 // ---------------------------------------------------------------------------
@@ -104,8 +109,7 @@ void __fastcall TMainFrm::btEnterClick(TObject *Sender) {
 		ARRAYOFCONST((cbKD->Items->Strings[cbKD->ItemIndex], meKC->Text,
 		dm->RS->RecordCount)));
 	dm->RS->Edit();
-	meScore->Text = FormatFloat("00.00",
-		dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat);
+	meScore->Text = FormatFloat("00.00",dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat);
 	meScore->SetFocus();
 	btEnter->Enabled = false;
 	btReset->Enabled = true;
@@ -141,11 +145,20 @@ void __fastcall TMainFrm::meScoreKeyPress(TObject *Sender,
 {
 	if ((int)Key == 13) {
 
-		dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =
-			StrToFloat(meScore->Text);
-		dm->RS->FieldByName("flag")->AsInteger = turnflag + 1;
-		dm->RS->FieldByName("FLHFLAG")->AsInteger = lhflag;
-        SeekRow();
+		if(dm->RS->FieldByName("flag")->AsInteger==0){//第一次输入 尚未确定科目类别 则直接写入
+			dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =StrToFloat(meScore->Text);
+			dm->RS->FieldByName("flag")->AsInteger = turnflag + 1;
+			dm->RS->FieldByName("FLHFLAG")->AsInteger = lhflag;
+		}else if(dm->RS->FieldByName("FLHFLAG")->AsInteger!=lhflag){//已输入一次科目类别 可能误输入 与当前输入类别不同
+			UnicodeString t=Format("该考生已经录入了%s的成绩，无法录入%s的成绩。如果您认为你输入的是正确的，请按确定按钮，将改写数据库中原有的记录",ARRAYOFCONST((subjects[dm->RS->FieldByName("FLHFLAG")->AsInteger],subjects[lhflag])));
+			if(Application->MessageBoxW(t.w_str(),L"科目类别冲突提示",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL)==IDYES){
+              dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =StrToFloat(meScore->Text);
+			  dm->RS->FieldByName("flag")->AsInteger = turnflag + 1;
+			  dm->RS->FieldByName("FLHFLAG")->AsInteger = lhflag;
+			}
+		}
+		dm->RS->Next() ;
+		SeekRow();
 	}
 }
 // ---------------------------------------------------------------------------
@@ -169,20 +182,30 @@ void __fastcall TMainFrm::btCancelClick(TObject *Sender) {
 }
 
 // ---------------------------------------------------------------------------
-void __fastcall TMainFrm::FormCreate(TObject *Sender) {
-	InitControl();
-}
-
-// ---------------------------------------------------------------------------
 void __fastcall TMainFrm::InitControl() {
 	if (dm == NULL)
 		dm = new Tdm(this);
 	LoadKD();
-	lbSubject->Caption = Format("当前输入科目:《%s》第 %d 轮",
-		ARRAYOFCONST((csubject, turnflag + 1)));
+	lbSubject->Caption = Format("当前输入科目:《%s》第 %d 轮",ARRAYOFCONST((subjects[lhflag], turnflag + 1)));
+	btAnotherSubject->Caption=Format("标记为%s考生(&N)",ARRAYOFCONST((subjects[another])));
 }
 
 void __fastcall TMainFrm::meScoreChange(TObject *Sender) {
 	isDirty = true;
 }
 // ---------------------------------------------------------------------------
+void __fastcall TMainFrm::dbGridCellClick(TColumn *Column)
+{
+   if(dm->RS->Active){
+		dm->RS->Edit() ;
+   }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainFrm::btAnotherSubjectClick(TObject *Sender)
+{
+		  dm->RS->FieldByName("flhflag")->AsInteger=another;
+}
+//---------------------------------------------------------------------------
+
+

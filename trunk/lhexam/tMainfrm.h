@@ -13,6 +13,8 @@
 #include <Vcl.Grids.hpp>
 #include "TdataMoudle.h"
 #include <ustring.h>
+#include <System.Actions.hpp>
+#include <Vcl.ActnList.hpp>
 //---------------------------------------------------------------------------
 class TMainFrm : public TForm
 {
@@ -35,6 +37,7 @@ __published:	// IDE-managed Components
 	TButton *btSave;
 	TButton *btCancel;
 	TPanel *pmsg;
+	TButton *btAnotherSubject;
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall btEnterClick(TObject *Sender);
 	void __fastcall btResetClick(TObject *Sender);
@@ -43,8 +46,9 @@ __published:	// IDE-managed Components
 	void __fastcall meKCKeyPress(TObject *Sender, System::WideChar &Key);
 	void __fastcall btSaveClick(TObject *Sender);
 	void __fastcall btCancelClick(TObject *Sender);
-	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall meScoreChange(TObject *Sender);
+	void __fastcall dbGridCellClick(TColumn *Column);
+	void __fastcall btAnotherSubjectClick(TObject *Sender);
 private:	// User declarations
 	TForm *pFrm;
 	void __fastcall LoadKD();  //
