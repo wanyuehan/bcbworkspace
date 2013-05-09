@@ -27,6 +27,16 @@ void __fastcall TMainFrm::LoadKD() {
 }
 
 // ---------------------------------------------------------------------------
+void __fastcall TMainFrm::SetEnable(bool isEnabled){
+	meScore->Enabled=isEnabled;
+	btAnotherSubject->Enabled=isEnabled;
+	btNext->Enabled=isEnabled;
+	btPrev->Enabled=isEnabled;
+	btSave->Enabled=isEnabled;
+	btCancel->Enabled=isEnabled;
+}
+
+
 void __fastcall TMainFrm::LoadCol() {
 
 	UnicodeString tempsubject = "FLH";
@@ -86,6 +96,7 @@ void __fastcall TMainFrm::btEnterClick(TObject *Sender) {
 	else {
 		return;
 	}
+	SetEnable(true);
 	dm->QRY->Active = false;
 	dm->QRY->SQL->Text =
 		Format("select * from lhresault where flag>%d and kddm='%s' and kcdm='%s' and flhflag=%d",
@@ -113,7 +124,7 @@ void __fastcall TMainFrm::btEnterClick(TObject *Sender) {
 	meScore->SetFocus();
 	btEnter->Enabled = false;
 	btReset->Enabled = true;
-    SeekRow();
+	SeekRow();
 }
 // ---------------------------------------------------------------------------
 
@@ -124,6 +135,7 @@ void __fastcall TMainFrm::btResetClick(TObject *Sender) {
 	btEnter->Enabled = true;
 	btReset->Enabled = false;
 	RestCol();
+	SetEnable(false);
 }
 
 // ---------------------------------------------------------------------------
@@ -144,7 +156,11 @@ void __fastcall TMainFrm::meScoreKeyPress(TObject *Sender,
 
 {
 	if ((int)Key == 13) {
-
+		if(turnflag>0&&fabs(StrToFloat(meScore->Text)-dm->RS->FieldByName("FLH1")->AsFloat)>0.001){
+			if(Application->MessageBoxW(L"两次输入的成绩不同，如果确认本次输入无误请按确认，否则请按取消",L"科目成绩不同提示",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL)==IDNO){
+                   return;
+			}
+		}
 		if(dm->RS->FieldByName("flag")->AsInteger==0){//第一次输入 尚未确定科目类别 则直接写入
 			dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =StrToFloat(meScore->Text);
 			dm->RS->FieldByName("flag")->AsInteger = turnflag + 1;
@@ -152,7 +168,7 @@ void __fastcall TMainFrm::meScoreKeyPress(TObject *Sender,
 		}else if(dm->RS->FieldByName("FLHFLAG")->AsInteger!=lhflag){//已输入一次科目类别 可能误输入 与当前输入类别不同
 			UnicodeString t=Format("该考生已经录入了%s的成绩，无法录入%s的成绩。如果您认为你输入的是正确的，请按确定按钮，将改写数据库中原有的记录",ARRAYOFCONST((subjects[dm->RS->FieldByName("FLHFLAG")->AsInteger],subjects[lhflag])));
 			if(Application->MessageBoxW(t.w_str(),L"科目类别冲突提示",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL)==IDYES){
-              dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =StrToFloat(meScore->Text);
+			  dm->RS->FieldByName(dbGrid->Columns->Items[2]->FieldName)->AsFloat =StrToFloat(meScore->Text);
 			  dm->RS->FieldByName("flag")->AsInteger = turnflag + 1;
 			  dm->RS->FieldByName("FLHFLAG")->AsInteger = lhflag;
 			}
@@ -187,7 +203,7 @@ void __fastcall TMainFrm::InitControl() {
 		dm = new Tdm(this);
 	LoadKD();
 	lbSubject->Caption = Format("当前输入科目:《%s》第 %d 轮",ARRAYOFCONST((subjects[lhflag], turnflag + 1)));
-	btAnotherSubject->Caption=Format("标记为%s考生(&N)",ARRAYOFCONST((subjects[another])));
+	btAnotherSubject->Caption=Format("标记为%s考生",ARRAYOFCONST((subjects[another])));
 }
 
 void __fastcall TMainFrm::meScoreChange(TObject *Sender) {

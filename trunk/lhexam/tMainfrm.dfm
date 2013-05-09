@@ -126,6 +126,7 @@ object MainFrm: TMainFrm
       Height = 48
       Alignment = taCenter
       DoubleBuffered = False
+      Enabled = False
       EditMask = '!99.99;1;_'
       Font.Charset = GB2312_CHARSET
       Font.Color = clHotLight
@@ -146,6 +147,7 @@ object MainFrm: TMainFrm
       Width = 143
       Height = 41
       Caption = #36755#20837#19979#19968#20010
+      Enabled = False
       TabOrder = 1
       OnClick = btNextClick
     end
@@ -155,6 +157,7 @@ object MainFrm: TMainFrm
       Width = 142
       Height = 44
       Caption = #20462#25913#19978#19968#20010
+      Enabled = False
       TabOrder = 2
     end
     object btSave: TButton
@@ -163,6 +166,7 @@ object MainFrm: TMainFrm
       Width = 142
       Height = 42
       Caption = #20445#23384#26412#32452#25968#25454
+      Enabled = False
       TabOrder = 3
       OnClick = btSaveClick
     end
@@ -172,6 +176,7 @@ object MainFrm: TMainFrm
       Width = 142
       Height = 42
       Caption = #21462#28040#26412#32452#25968#25454
+      Enabled = False
       TabOrder = 4
       OnClick = btCancelClick
     end
@@ -181,6 +186,7 @@ object MainFrm: TMainFrm
       Width = 141
       Height = 67
       Caption = #21478#22806#19968#38376#35838#31243
+      Enabled = False
       TabOrder = 5
       OnClick = btAnotherSubjectClick
     end
@@ -200,6 +206,15 @@ object MainFrm: TMainFrm
       Height = 401
       Align = alClient
       DataSource = dm.GRIDDS
+      DrawingStyle = gdsClassic
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Font.Quality = fqClearType
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
       TabOrder = 0
       TitleFont.Charset = GB2312_CHARSET
       TitleFont.Color = clWindowText
@@ -244,8 +259,8 @@ object MainFrm: TMainFrm
           Color = clSkyBlue
           Expanded = False
           Font.Charset = GB2312_CHARSET
-          Font.Color = clNavy
-          Font.Height = -13
+          Font.Color = clRed
+          Font.Height = -19
           Font.Name = 'Tahoma'
           Font.Style = []
           Title.Caption = '%s'#31532'%d'#36718#25104#32489
