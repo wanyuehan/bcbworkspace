@@ -45,7 +45,7 @@ object dm: Tdm
     end
     object RSFHX1: TBCDField
       FieldName = 'Flh1'
-      DisplayFormat = '00.00'
+      DisplayFormat = '0.00'
       EditFormat = '00.00'
       MaxValue = 10.000000000000000000
       Precision = 18
@@ -53,7 +53,7 @@ object dm: Tdm
     end
     object RSFHX2: TBCDField
       FieldName = 'Flh2'
-      DisplayFormat = '00.00'
+      DisplayFormat = '0.00'
       EditFormat = '00.00'
       MaxValue = 10.000000000000000000
       Precision = 18
@@ -61,7 +61,7 @@ object dm: Tdm
     end
     object RSFHX: TBCDField
       FieldName = 'Flh'
-      DisplayFormat = '00.00'
+      DisplayFormat = '0.00'
       EditFormat = '00.00'
       MaxValue = 10.000000000000000000
       Precision = 18
