@@ -233,6 +233,7 @@ object MainFrm: TMainFrm
           Font.Height = -16
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Font.Quality = fqClearType
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = #29702#21270#21152#35797#21495
@@ -249,6 +250,7 @@ object MainFrm: TMainFrm
           Font.Height = -13
           Font.Name = 'Tahoma'
           Font.Style = []
+          Font.Quality = fqClearType
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = #22995#21517
@@ -263,6 +265,7 @@ object MainFrm: TMainFrm
           Font.Height = -19
           Font.Name = 'Tahoma'
           Font.Style = []
+          Font.Quality = fqClearType
           Title.Caption = '%s'#31532'%d'#36718#25104#32489
           Width = 156
           Visible = True
@@ -277,6 +280,7 @@ object MainFrm: TMainFrm
           Font.Height = -13
           Font.Name = 'Tahoma'
           Font.Style = []
+          Font.Quality = fqClearType
           Title.Alignment = taCenter
           Title.Caption = #36873#32771#31867#22411
           Width = 222
