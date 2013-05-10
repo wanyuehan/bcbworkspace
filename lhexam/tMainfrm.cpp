@@ -221,6 +221,7 @@ void __fastcall TMainFrm::dbGridCellClick(TColumn *Column)
 void __fastcall TMainFrm::btAnotherSubjectClick(TObject *Sender)
 {
 		  dm->RS->FieldByName("flhflag")->AsInteger=another;
+		  btNext->Click();
 }
 //---------------------------------------------------------------------------
 
