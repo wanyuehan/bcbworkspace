@@ -122,22 +122,22 @@ object MainFrm: TMainFrm
     object meScore: TMaskEdit
       Left = 33
       Top = 88
-      Width = 142
+      Width = 140
       Height = 48
       Alignment = taCenter
       DoubleBuffered = False
       Enabled = False
-      EditMask = '!99.99;1;_'
+      EditMask = '!9.99;1;_'
       Font.Charset = GB2312_CHARSET
       Font.Color = clHotLight
       Font.Height = -33
       Font.Name = 'Tahoma'
       Font.Style = []
-      MaxLength = 5
+      MaxLength = 4
       ParentDoubleBuffered = False
       ParentFont = False
       TabOrder = 0
-      Text = '  .  '
+      Text = ' .  '
       OnChange = meScoreChange
       OnKeyPress = meScoreKeyPress
     end
@@ -188,6 +188,7 @@ object MainFrm: TMainFrm
       Caption = #21478#22806#19968#38376#35838#31243
       Enabled = False
       TabOrder = 5
+      Visible = False
       OnClick = btAnotherSubjectClick
     end
   end
@@ -213,7 +214,7 @@ object MainFrm: TMainFrm
       Font.Name = 'Tahoma'
       Font.Style = []
       Font.Quality = fqClearType
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       TabOrder = 0
       TitleFont.Charset = GB2312_CHARSET
@@ -222,6 +223,8 @@ object MainFrm: TMainFrm
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnCellClick = dbGridCellClick
+      OnKeyPress = dbGridKeyPress
+      OnMouseUp = dbGridMouseUp
       Columns = <
         item
           Alignment = taCenter
@@ -268,22 +271,6 @@ object MainFrm: TMainFrm
           Font.Quality = fqClearType
           Title.Caption = '%s'#31532'%d'#36718#25104#32489
           Width = 156
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Color = clCream
-          Expanded = False
-          FieldName = 'FLHFLAG'
-          Font.Charset = GB2312_CHARSET
-          Font.Color = clHighlight
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Font.Quality = fqClearType
-          Title.Alignment = taCenter
-          Title.Caption = #36873#32771#31867#22411
-          Width = 222
           Visible = True
         end>
     end
