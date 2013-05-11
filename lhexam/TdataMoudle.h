@@ -17,14 +17,16 @@ __published:	// IDE-managed Components
 	TWideStringField *RSFZKH;
 	TWideStringField *RSFXM;
 	TWideStringField *RSFLHJSH;
-	TBCDField *RSFHX1;
-	TBCDField *RSFHX2;
-	TBCDField *RSFHX;
+	TFloatField *RSFWL1;
+	TFloatField *RSFWL2;
+	TFloatField *RSFWL;
+	TFloatField *RSFHX1;
+	TFloatField *RSFHX2;
+	TFloatField *RSFHX;
 	TSmallintField *RSflag;
 	TStringField *RSkddm;
 	TStringField *RSkcdm;
 	TStringField *RSzwh;
-	TSmallintField *RSFLHFLAG;
 	void __fastcall DataModuleCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations

@@ -43,29 +43,41 @@ object dm: Tdm
       FieldName = 'FLHJSH'
       Size = 14
     end
-    object RSFHX1: TBCDField
-      FieldName = 'Flh1'
+    object RSFWL1: TFloatField
+      FieldName = 'FWL1'
       DisplayFormat = '0.00'
-      EditFormat = '00.00'
-      MaxValue = 10.000000000000000000
-      Precision = 18
-      Size = 2
+      EditFormat = '0.00'
+      MaxValue = 9.990000000000000000
     end
-    object RSFHX2: TBCDField
-      FieldName = 'Flh2'
+    object RSFWL2: TFloatField
+      FieldName = 'FWL2'
       DisplayFormat = '0.00'
-      EditFormat = '00.00'
-      MaxValue = 10.000000000000000000
-      Precision = 18
-      Size = 2
+      EditFormat = '0.00'
+      MaxValue = 9.990000000000000000
     end
-    object RSFHX: TBCDField
-      FieldName = 'Flh'
+    object RSFWL: TFloatField
+      FieldName = 'FWL'
       DisplayFormat = '0.00'
-      EditFormat = '00.00'
-      MaxValue = 10.000000000000000000
-      Precision = 18
-      Size = 2
+      EditFormat = '0.00'
+      MaxValue = 9.990000000000000000
+    end
+    object RSFHX1: TFloatField
+      FieldName = 'FHX1'
+      DisplayFormat = '0.00'
+      EditFormat = '0.00'
+      MaxValue = 9.990000000000000000
+    end
+    object RSFHX2: TFloatField
+      FieldName = 'FHX2'
+      DisplayFormat = '0.00'
+      EditFormat = '0.00'
+      MaxValue = 9.990000000000000000
+    end
+    object RSFHX: TFloatField
+      FieldName = 'FHX'
+      DisplayFormat = '0.00'
+      EditFormat = '0.00'
+      MaxValue = 9.990000000000000000
     end
     object RSflag: TSmallintField
       FieldName = 'flag'
@@ -84,9 +96,6 @@ object dm: Tdm
       FieldName = 'zwh'
       FixedChar = True
       Size = 2
-    end
-    object RSFLHFLAG: TSmallintField
-      FieldName = 'FLHFLAG'
     end
   end
 end

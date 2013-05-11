@@ -49,6 +49,9 @@ __published:	// IDE-managed Components
 	void __fastcall meScoreChange(TObject *Sender);
 	void __fastcall dbGridCellClick(TColumn *Column);
 	void __fastcall btAnotherSubjectClick(TObject *Sender);
+	void __fastcall dbGridKeyPress(TObject *Sender, System::WideChar &Key);
+	void __fastcall dbGridMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+          int X, int Y);
 private:	// User declarations
 	TForm *pFrm;
 	void __fastcall LoadKD();  //
