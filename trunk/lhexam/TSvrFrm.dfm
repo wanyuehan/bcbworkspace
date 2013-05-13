@@ -1,0 +1,71 @@
+object SvrFrm: TSvrFrm
+  Left = 0
+  Top = 0
+  Caption = #26381#21153#31383#21475
+  ClientHeight = 447
+  ClientWidth = 647
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 89
+    Height = 447
+    Align = alLeft
+    BevelOuter = bvLowered
+    TabOrder = 0
+    ExplicitHeight = 311
+    object btCheck: TButton
+      Left = 8
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #21452#24037#26657#39564
+      TabOrder = 0
+      OnClick = btCheckClick
+    end
+  end
+  object Panel2: TPanel
+    Left = 89
+    Top = 0
+    Width = 558
+    Height = 447
+    Align = alClient
+    TabOrder = 1
+    ExplicitWidth = 554
+    ExplicitHeight = 311
+    object dbGrid2: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 556
+      Height = 136
+      Align = alTop
+      DataSource = dm.CHKDS
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+    object mmo: TMemo
+      Left = 1
+      Top = 137
+      Width = 556
+      Height = 309
+      Align = alClient
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 1
+      ExplicitWidth = 552
+      ExplicitHeight = 173
+    end
+  end
+end

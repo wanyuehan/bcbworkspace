@@ -4,7 +4,7 @@
         <ProjectType>CppVCLApplication</ProjectType>
         <MainSource>TYSvr.cpp</MainSource>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <ProjectVersion>14.4</ProjectVersion>
+        <ProjectVersion>14.6</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -85,10 +85,7 @@
         <Multithreaded>true</Multithreaded>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <BCC_Defines>NO_STRICT;$(BCC_Defines)</BCC_Defines>
-        <BRCC_Defines>NO_STRICT;$(BRCC_Defines)</BRCC_Defines>
         <BCC_UserSuppliedOptions> -Vx -Ve</BCC_UserSuppliedOptions>
-        <TASM_Defines>NO_STRICT;$(TASM_Defines)</TASM_Defines>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
         <VerInfo_Locale>1033</VerInfo_Locale>

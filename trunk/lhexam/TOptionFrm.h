@@ -13,6 +13,7 @@
 #include <Windows.hpp>
 #include <System.hpp>
 #include "tMainfrm.h"
+#include "TSvrFrm.h"
 //----------------------------------------------------------------------------
 class TOptionFrm : public TForm
 {
@@ -26,11 +27,13 @@ __published:
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall OKBtnClick(TObject *Sender);
 	void __fastcall CancelBtnClick(TObject *Sender);
+	void __fastcall btAdminClick(TObject *Sender);
 private:
 	int FLAG_SUBJECT;
 	int FLAG_TURN;
 	bool FLAG_ADMIN;
 	TMainFrm *mainfrm;
+	TSvrFrm *SvrFrm;
 public:
 	virtual __fastcall TOptionFrm(TComponent* AOwner);
 };

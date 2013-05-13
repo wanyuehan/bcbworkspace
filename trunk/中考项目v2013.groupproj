@@ -6,9 +6,6 @@
         <Projects Include="UML\理化考试设计.tgproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="lhexam\LHExam.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="TYInput\TYInput.cbproj">
             <Dependencies/>
         </Projects>
@@ -16,6 +13,9 @@
             <Dependencies/>
         </Projects>
         <Projects Include="WYHEXCEL\WYHEXCEL.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="lhexam\LHExam.cbproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -34,15 +34,6 @@
     </Target>
     <Target Name="理化考试设计:Make">
         <MSBuild Projects="UML\理化考试设计.tgproj" Targets="Make"/>
-    </Target>
-    <Target Name="LHExam">
-        <MSBuild Projects="lhexam\LHExam.cbproj"/>
-    </Target>
-    <Target Name="LHExam:Clean">
-        <MSBuild Projects="lhexam\LHExam.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="LHExam:Make">
-        <MSBuild Projects="lhexam\LHExam.cbproj" Targets="Make"/>
     </Target>
     <Target Name="TYInput">
         <MSBuild Projects="TYInput\TYInput.cbproj"/>
@@ -71,14 +62,23 @@
     <Target Name="WYHEXCEL:Make">
         <MSBuild Projects="WYHEXCEL\WYHEXCEL.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="LHExam">
+        <MSBuild Projects="lhexam\LHExam.cbproj"/>
+    </Target>
+    <Target Name="LHExam:Clean">
+        <MSBuild Projects="lhexam\LHExam.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LHExam:Make">
+        <MSBuild Projects="lhexam\LHExam.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="理化考试设计;LHExam;TYInput;TYSvr;WYHEXCEL"/>
+        <CallTarget Targets="理化考试设计;TYInput;TYSvr;WYHEXCEL;LHExam"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="理化考试设计:Clean;LHExam:Clean;TYInput:Clean;TYSvr:Clean;WYHEXCEL:Clean"/>
+        <CallTarget Targets="理化考试设计:Clean;TYInput:Clean;TYSvr:Clean;WYHEXCEL:Clean;LHExam:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="理化考试设计:Make;LHExam:Make;TYInput:Make;TYSvr:Make;WYHEXCEL:Make"/>
+        <CallTarget Targets="理化考试设计:Make;TYInput:Make;TYSvr:Make;WYHEXCEL:Make;LHExam:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

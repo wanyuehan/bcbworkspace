@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{AE517F1E-3CB1-40EC-9453-1980CCB5D81C}</ProjectGuid>
-        <ProjectVersion>14.4</ProjectVersion>
+        <ProjectVersion>14.6</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <AppType>Application</AppType>
         <MainSource>LHExam.cpp</MainSource>
@@ -110,7 +110,6 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=马鞍山市凡越软件科技;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Debug>true</VerInfo_Debug>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -146,6 +145,12 @@
             <DependentOn>TdataMoudle.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
+        <CppCompile Include="TFrmEdit.cpp">
+            <Form>frmEdit</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>TFrmEdit.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
         <CppCompile Include="tMainfrm.cpp">
             <Form>MainFrm</Form>
             <FormType>dfm</FormType>
@@ -157,10 +162,18 @@
             <DependentOn>TOptionFrm.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
+        <CppCompile Include="TSvrFrm.cpp">
+            <Form>SvrFrm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>TSvrFrm.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
         <None Include="理化调试数据库2013.mdb"/>
-        <FormResources Include="tMainfrm.dfm"/>
         <FormResources Include="TOptionFrm.dfm"/>
+        <FormResources Include="tMainfrm.dfm"/>
+        <FormResources Include="TSvrFrm.dfm"/>
         <FormResources Include="TdataMoudle.dfm"/>
+        <FormResources Include="TFrmEdit.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
