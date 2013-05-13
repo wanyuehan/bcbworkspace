@@ -12,6 +12,7 @@ __fastcall TOptionFrm::TOptionFrm(TComponent* AOwner)
 	: TForm(AOwner)
 {
 	mainfrm=NULL;
+	SvrFrm=NULL;
 }
 //---------------------------------------------------------------------
 
@@ -63,6 +64,14 @@ void __fastcall TOptionFrm::OKBtnClick(TObject *Sender)
 void __fastcall TOptionFrm::CancelBtnClick(TObject *Sender)
 {
   this->Close();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TOptionFrm::btAdminClick(TObject *Sender)
+{
+		if(SvrFrm==NULL)SvrFrm=new TSvrFrm(this);
+		SvrFrm->Show();
 }
 //---------------------------------------------------------------------------
 

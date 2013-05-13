@@ -68,8 +68,9 @@ object OptionFrm: TOptionFrm
     Top = 77
     Width = 154
     Height = 33
-    Caption = #36755#20837#26356#27491
+    Caption = #20998#25968#26657#39564
     TabOrder = 4
     Visible = False
+    OnClick = btAdminClick
   end
 end

@@ -1,8 +1,8 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 85
-  Width = 174
+  Height = 106
+  Width = 199
   object GRIDDS: TDataSource
     DataSet = RS
     Left = 8
@@ -15,10 +15,11 @@ object dm: Tdm
     Top = 8
   end
   object conn: TADOConnection
+    Connected = True
     ConnectionString = 'FILE NAME=.\connection.udl'
     LoginPrompt = False
     Mode = cmShareDenyNone
-    Provider = '.\connection.udl'
+    Provider = 'SQLOLEDB.1'
     Left = 48
     Top = 8
   end
@@ -93,6 +94,80 @@ object dm: Tdm
       Size = 2
     end
     object RSzwh: TStringField
+      FieldName = 'zwh'
+      FixedChar = True
+      Size = 2
+    end
+  end
+  object CHKDS: TDataSource
+    DataSet = CHKRS
+    Left = 16
+    Top = 56
+  end
+  object CHKRS: TADOTable
+    Active = True
+    Connection = conn
+    CursorType = ctStatic
+    IndexFieldNames = 'flhjsh'
+    TableName = 'lhresault'
+    Left = 64
+    Top = 56
+    object CHKRSFZKH: TWideStringField
+      FieldName = 'FZKH'
+      Size = 12
+    end
+    object CHKRSFXM: TWideStringField
+      FieldName = 'FXM'
+      Size = 8
+    end
+    object CHKRSFLHJSH: TWideStringField
+      FieldName = 'FLHJSH'
+      Size = 14
+    end
+    object CHKRSFWL1: TBCDField
+      FieldName = 'FWL1'
+      Precision = 18
+      Size = 2
+    end
+    object CHKRSFWL2: TBCDField
+      FieldName = 'FWL2'
+      Precision = 18
+      Size = 2
+    end
+    object CHKRSFWL: TBCDField
+      FieldName = 'FWL'
+      Precision = 18
+      Size = 2
+    end
+    object CHKRSFHX1: TBCDField
+      FieldName = 'FHX1'
+      Precision = 18
+      Size = 2
+    end
+    object CHKRSFHX2: TBCDField
+      FieldName = 'FHX2'
+      Precision = 18
+      Size = 2
+    end
+    object CHKRSFHX: TFMTBCDField
+      FieldName = 'FHX'
+      Precision = 18
+      Size = 12
+    end
+    object CHKRSflag: TSmallintField
+      FieldName = 'flag'
+    end
+    object CHKRSkddm: TStringField
+      FieldName = 'kddm'
+      FixedChar = True
+      Size = 4
+    end
+    object CHKRSkcdm: TStringField
+      FieldName = 'kcdm'
+      FixedChar = True
+      Size = 2
+    end
+    object CHKRSzwh: TStringField
       FieldName = 'zwh'
       FixedChar = True
       Size = 2
