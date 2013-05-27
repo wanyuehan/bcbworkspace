@@ -2,7 +2,7 @@ object OptionFrm: TOptionFrm
   Left = 227
   Top = 108
   BorderStyle = bsDialog
-  Caption = #35831#36873#25321#24405#20837#30340#21442#25968
+  Caption = #35831#36873#25321#24405#20837#30340#21442#25968' '
   ClientHeight = 170
   ClientWidth = 382
   Color = clBtnFace
